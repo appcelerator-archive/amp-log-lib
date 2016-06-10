@@ -2,6 +2,7 @@ build:
   sut:
     image: appcelerator/node:amp
     commands:
+    - npm install
     - atomiq make babel
     - npm run test
 

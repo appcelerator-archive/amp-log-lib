@@ -50,12 +50,13 @@ var amp_log = {
       level: options.level || process.env.AMP_LOG_LEVEL || "debug",
       stream: process.env.AMP_LOG_FORMAT !== null && process.stdout.isTTY || process.env.AMP_LOG_FORMAT == "pretty" ? prettyStream() : process.stdout
     });
-    amp_log.trace = log.trace;
-    amp_log.debug = log.debug;
-    amp_log.info = log.info;
-    amp_log.warn = log.warn;
-    amp_log.error = log.error;
-    amp_log.fatal = log.fatal;
+    amp_log.trace = log.trace.bind(log);
+    amp_log.debug = log.debug.bind(log);
+    amp_log.info = log.info.bind(log);
+    amp_log.warn = log.warn.bind(log);
+    amp_log.error = log.error.bind(log);
+    amp_log.fatal = log.fatal.bind(log);
+    amp_log.init = null;
   }
 };
 

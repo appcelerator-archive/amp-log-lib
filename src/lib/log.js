@@ -5,10 +5,10 @@ import fs from 'fs'
 import through from 'through'
 
 const prettyStream = function(args) {
-  args = args || ['-o', 'short'];
+  args = args || ['-o', 'short']
   const bin = path.resolve(path.dirname(require.resolve('bunyan')), '..', 'bin', 'bunyan');
   const stream = through(function write(data) {
-    this.queue(data);
+    this.queue(data)
   }, function end () {
     this.queue(null);
   });
@@ -16,11 +16,11 @@ const prettyStream = function(args) {
   if (bin && fs.existsSync(bin)) {
     const formatter = spawn(bin, ['-o', 'short'], {
       stdio: [null, process.stdout, process.stderr]
-    });
-    stream.pipe(formatter.stdin);
+    })
+    stream.pipe(formatter.stdin)
   }
 
-  return stream;
+  return stream
 };
 
 const amp_log = {
@@ -29,13 +29,14 @@ const amp_log = {
       name: options.name,
       level: options.level || process.env.AMP_LOG_LEVEL || "debug",
       stream: process.env.AMP_LOG_FORMAT !== null && process.stdout.isTTY || process.env.AMP_LOG_FORMAT == "pretty" ? prettyStream() : process.stdout,
-    });
-    amp_log.trace = log.trace;
-    amp_log.debug = log.debug;
-    amp_log.info = log.info;
-    amp_log.warn = log.warn;
-    amp_log.error = log.error;
-    amp_log.fatal = log.fatal;
+    })
+    amp_log.trace = log.trace.bind(log)
+    amp_log.debug = log.debug.bind(log)
+    amp_log.info = log.info.bind(log)
+    amp_log.warn = log.warn.bind(log)
+    amp_log.error = log.error.bind(log)
+    amp_log.fatal = log.fatal.bind(log)
+    amp_log.init = null
   }
 }
 

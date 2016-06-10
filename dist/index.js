@@ -6,12 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _log = require('./lib/log');
 
-Object.defineProperty(exports, 'log', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_log).default;
-  }
-});
+var _log2 = _interopRequireDefault(_log);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _log2.default;
 //# sourceMappingURL=index.js.map

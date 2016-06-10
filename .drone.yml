@@ -1,0 +1,34 @@
+build:
+  sut:
+    image: appcelerator/node:amp
+    commands:
+    - atomiq make babel
+    - npm run test
+
+debug: true
+
+cache:
+  mount:
+    - .git
+
+notify:
+  downstream:
+    repositories:
+      - appcelerator/amp-consul-lib
+      - appcelerator/amp-service
+      - appcelerator/amp-service-worker
+    token: $$DRONE_TOKEN
+    fork: true
+    server: http://drone.amp.appcelerator.io:8000
+    when:
+      tag: master
+      success: true
+      event: push
+      repo: appcelerator/amp-log-lib
+
+  slack:
+    webhook_url: https://hooks.slack.com/services/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
+    channel: amp-ci
+    username: amp-drone-ci
+    template: >
+      build {{repo.name}} #{{ build.number }} finished with a {{ build.status }} status. ({{repo.full_name}}/[{{ build.branch }}] @{{build.author}} http://drone.amp.appcelerator.io:8000/{{repo.full_name}} )

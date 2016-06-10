@@ -1,2 +1,4 @@
 import log from './lib/log'
-export default log
+
+module.exports=log
+

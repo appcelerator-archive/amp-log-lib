@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;AAAA","file":"index.js","sourcesContent":["import log from './lib/log'\nexport default log\n"]}
+{"version":3,"sources":["index.js"],"names":[],"mappings":";;AAAA;;;;;;AAEA,OAAO,OAAP","file":"index.js","sourcesContent":["import log from './lib/log'\n\nmodule.exports=log\n\n"]}

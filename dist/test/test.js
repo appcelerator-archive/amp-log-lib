@@ -1,7 +1,5 @@
 'use strict';
 
-require('babel-polyfill');
-
 require('source-map-support/register');
 
 var _assert = require('assert');

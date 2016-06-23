@@ -3,7 +3,7 @@ build:
     image: appcelerator/node:amp
     commands:
     - npm install
-    - atomiq make babel
+    - npm run build
     - npm run test
 
 debug: true

@@ -3,6 +3,7 @@ import { spawn } from 'child_process'
 import path from 'path'
 import fs from 'fs'
 import through from 'through'
+import logpkg from '../../package.json'
 
 const prettyStream = function(args) {
   args = args || ['-o', 'short']
@@ -24,10 +25,10 @@ const prettyStream = function(args) {
 };
 
 const amp_log = {
-  init(options) {
+  init(pkg, options) {
     const log = bunyan.createLogger({
-      name: options.name,
-      level: options.level || process.env.AMP_LOG_LEVEL || "debug",
+      name: pkg.name,
+      level: options && options.level || process.env.AMP_LOG_LEVEL || "debug",
       stream: process.env.AMP_LOG_FORMAT !== null && process.stdout.isTTY || process.env.AMP_LOG_FORMAT == "pretty" ? prettyStream() : process.stdout,
     })
     amp_log.trace = log.trace.bind(log)
@@ -37,6 +38,8 @@ const amp_log = {
     amp_log.error = log.error.bind(log)
     amp_log.fatal = log.fatal.bind(log)
     amp_log.init = null
+    amp_log.info("starting", pkg.name, pkg.version)
+    amp_log.info("using amp-log-lib", logpkg.name, logpkg.version)
   }
 }
 

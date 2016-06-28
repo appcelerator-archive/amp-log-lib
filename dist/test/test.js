@@ -13,8 +13,8 @@ var _2 = _interopRequireDefault(_);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 describe('amp-log-lib', function () {
-  it('first direct call without init should fail', function () {
-    var ok = false;
+  it('first direct call without init should fail', () => {
+    let ok = false;
     try {
       _2.default.info("info level");
     } catch (e) {
@@ -23,7 +23,7 @@ describe('amp-log-lib', function () {
     (0, _assert2.default)(ok);
   });
 
-  it('should output some log', function () {
+  it('should output some log', () => {
     _2.default.init({ name: "module-name" });
     _2.default.trace("trace level");
     _2.default.debug("debug level");
@@ -33,8 +33,8 @@ describe('amp-log-lib', function () {
     _2.default.fatal("fatal level");
   });
 
-  it('second call to init should fail', function () {
-    var ok = false;
+  it('second call to init should fail', () => {
+    let ok = false;
     try {
       _2.default.init({ name: "module-name2" });
     } catch (e) {
